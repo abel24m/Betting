@@ -27,15 +27,26 @@ class SaveModelViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func savePressed(_ sender: UIButton) {
+        //create saved model
         let newModel = Model(context: context)
         newModel.name = NameOfModel.text
         newModel.league = modelMaster.getLeague()
         
+        //UserStatsChosen need to be changed from String:UILabel to String:String
+        var userStats = [String:String]()
+        for (key,value) in modelMaster.getUserStatsChosen() {
+            userStats[key] = value.text!
+        }
+        print(userStats)
+        newModel.stats = userStats
+        //save model to core data
         do {
             try self.context.save()
         } catch  {
         
         }
+        
+        //Jump to the home screen so the user can see the  new model added
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let nextViewController = storyBoard.instantiateViewController(identifier: "TabController") as UITabBarController
         nextViewController.selectedIndex = 1

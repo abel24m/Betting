@@ -54,7 +54,7 @@ class ModelMaster{
         seasonStats = stats
     }
     
-    func getUserStatsChosen() -> [String: UILabel] {
+    func getUserStatsChosen() -> [String:UILabel] {
         return userModelData
     }
     

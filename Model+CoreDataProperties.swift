@@ -2,7 +2,7 @@
 //  Model+CoreDataProperties.swift
 //  Locks
 //
-//  Created by Abel Moreno on 11/7/20.
+//  Created by Abel Moreno on 11/12/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 //
@@ -19,7 +19,7 @@ extension Model {
 
     @NSManaged public var league: String?
     @NSManaged public var name: String?
-    @NSManaged public var stats: [String:String]?
+    @NSManaged public var stats: [String : String]?
 
 }
 

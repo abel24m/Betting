@@ -14,15 +14,16 @@
 		C10180882540BD7000795C4E /* ModelMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10180872540BD7000795C4E /* ModelMaster.swift */; };
 		C101808E2540CCD100795C4E /* WeekMatchUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C101808D2540CCD100795C4E /* WeekMatchUpData.swift */; };
 		C1018091254107CE00795C4E /* WeekMatchUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1018090254107CE00795C4E /* WeekMatchUpModel.swift */; };
+		C111458A255C72E4000561DB /* ShowModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1114589255C72E4000561DB /* ShowModelViewController.swift */; };
 		C12974322558C09800259C7A /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12974312558C09800259C7A /* LaunchScreenViewController.swift */; };
 		C12974462558CD5F00259C7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12974452558CD5F00259C7A /* LaunchScreen.storyboard */; };
 		C16A11D92555B5620096BEAF /* LocksCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C16A11D72555B5620096BEAF /* LocksCoreData.xcdatamodeld */; };
 		C16A11DC255608EE0096BEAF /* SaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */; };
-		C16A11E82557781C0096BEAF /* Model+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16A11E62557781C0096BEAF /* Model+CoreDataClass.swift */; };
-		C16A11E92557781C0096BEAF /* Model+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16A11E72557781C0096BEAF /* Model+CoreDataProperties.swift */; };
 		C1A9C34F251DB50800A4FDA4 /* AssignValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */; };
 		C1C2FF012550AEC60006F8A4 /* MyLocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */; };
 		C1C519A0253FCD36005D7733 /* NFLTeamSeasonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C5199F253FCD36005D7733 /* NFLTeamSeasonData.swift */; };
+		C1CE1BDA255DAA190023344F /* Model+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE1BD8255DAA190023344F /* Model+CoreDataClass.swift */; };
+		C1CE1BDB255DAA190023344F /* Model+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CE1BD9255DAA190023344F /* Model+CoreDataProperties.swift */; };
 		C1F8F85C2507377200EB1FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8F85B2507377200EB1FFC /* AppDelegate.swift */; };
 		C1F8F85E2507377200EB1FFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8F85D2507377200EB1FFC /* SceneDelegate.swift */; };
 		C1F8F8602507377200EB1FFC /* StatsChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8F85F2507377200EB1FFC /* StatsChooseViewController.swift */; };
@@ -39,15 +40,16 @@
 		C10180872540BD7000795C4E /* ModelMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMaster.swift; sourceTree = "<group>"; };
 		C101808D2540CCD100795C4E /* WeekMatchUpData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekMatchUpData.swift; sourceTree = "<group>"; };
 		C1018090254107CE00795C4E /* WeekMatchUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekMatchUpModel.swift; sourceTree = "<group>"; };
+		C1114589255C72E4000561DB /* ShowModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowModelViewController.swift; sourceTree = "<group>"; };
 		C12974312558C09800259C7A /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		C12974452558CD5F00259C7A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C16A11D82555B5620096BEAF /* LocksCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocksCoreData.xcdatamodel; sourceTree = "<group>"; };
 		C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveModelViewController.swift; sourceTree = "<group>"; };
-		C16A11E62557781C0096BEAF /* Model+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataClass.swift"; sourceTree = "<group>"; };
-		C16A11E72557781C0096BEAF /* Model+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignValuesViewController.swift; sourceTree = "<group>"; };
 		C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocksViewController.swift; sourceTree = "<group>"; };
 		C1C5199F253FCD36005D7733 /* NFLTeamSeasonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFLTeamSeasonData.swift; sourceTree = "<group>"; };
+		C1CE1BD8255DAA190023344F /* Model+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C1CE1BD9255DAA190023344F /* Model+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Model+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		C1F8F8582507377200EB1FFC /* Locks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1F8F85B2507377200EB1FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1F8F85D2507377200EB1FFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,8 @@
 		C1F8F84F2507377100EB1FFC = {
 			isa = PBXGroup;
 			children = (
+				C1CE1BD8255DAA190023344F /* Model+CoreDataClass.swift */,
+				C1CE1BD9255DAA190023344F /* Model+CoreDataProperties.swift */,
 				C1F8F85A2507377200EB1FFC /* Betting */,
 				C1F8F8592507377200EB1FFC /* Products */,
 			);
@@ -126,8 +130,6 @@
 		C1F8F85A2507377200EB1FFC /* Betting */ = {
 			isa = PBXGroup;
 			children = (
-				C16A11E62557781C0096BEAF /* Model+CoreDataClass.swift */,
-				C16A11E72557781C0096BEAF /* Model+CoreDataProperties.swift */,
 				C1C51998253FB571005D7733 /* Model */,
 				C1C51997253FB568005D7733 /* View */,
 				C1FB634A251DB40700A7F53E /* Controllers */,
@@ -151,6 +153,7 @@
 				C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */,
 				C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */,
 				C12974312558C09800259C7A /* LaunchScreenViewController.swift */,
+				C1114589255C72E4000561DB /* ShowModelViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -234,16 +237,17 @@
 				C1C2FF012550AEC60006F8A4 /* MyLocksViewController.swift in Sources */,
 				C1F8F870250737B900EB1FFC /* Stats.swift in Sources */,
 				C101808E2540CCD100795C4E /* WeekMatchUpData.swift in Sources */,
-				C16A11E82557781C0096BEAF /* Model+CoreDataClass.swift in Sources */,
 				C1F8F85C2507377200EB1FFC /* AppDelegate.swift in Sources */,
 				C1F8F85E2507377200EB1FFC /* SceneDelegate.swift in Sources */,
 				C16A11DC255608EE0096BEAF /* SaveModelViewController.swift in Sources */,
-				C16A11E92557781C0096BEAF /* Model+CoreDataProperties.swift in Sources */,
+				C111458A255C72E4000561DB /* ShowModelViewController.swift in Sources */,
 				C1018091254107CE00795C4E /* WeekMatchUpModel.swift in Sources */,
+				C1CE1BDB255DAA190023344F /* Model+CoreDataProperties.swift in Sources */,
 				C10180822540A17200795C4E /* ChooseLeagueController.swift in Sources */,
 				C1A9C34F251DB50800A4FDA4 /* AssignValuesViewController.swift in Sources */,
 				C101807C2540774B00795C4E /* NFLTeamSeasonStats.swift in Sources */,
 				C10180852540A89A00795C4E /* ModelResultsController.swift in Sources */,
+				C1CE1BDA255DAA190023344F /* Model+CoreDataClass.swift in Sources */,
 				C1C519A0253FCD36005D7733 /* NFLTeamSeasonData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
