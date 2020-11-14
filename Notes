@@ -35,3 +35,74 @@ ModelResultsGenerator{
     }
 
 }
+
+
+Model Master (Class)
+Model Name
+User Data
+Football master (Child Class)
+League
+Model Parameters [String:String]
+[Stats: Value/Weight]
+Basketball master
+
+Teams Stats.swift
+Football team (Structs)
+Team name
+Stat1
+Stat2
+Stat3
+Basketball team
+Baseball team
+
+League Data (Class) (Static)
+NCAAF Data (Stuct)
+var Stats = [String]
+var API Call 1
+var API Call 2
+Basketball Stats (Struct)
+var Stats = [String]
+Var API Call 1
+Var API Call 2
+
+
+LeagueRawData.swift
+
+NFL Season Data (Struct)
+
+NFL Week Matchup Data (Struct)
+
+
+
+
+
+
+
+
+
+LeagueMatchupData.swift
+
+NFLMatchupModelResults (Struct)
+Home team
+Away team
+HomeModelScore
+AwayModelScore
+Stat1_Results
+Stat2_Resutls
+
+NBA Matchup (Struct)
+
+
+
+ResultsGenerator (Class)
+
+Variables
+Stats Chosen [String:String] == [Stat:Value]
+League
+SeasonData = [TeamSeasonData]
+MatchupData = [WeekMatchupData]
+ModelResults = [MatchupModelResults]
+    
+
+
+
