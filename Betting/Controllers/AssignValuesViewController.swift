@@ -14,9 +14,11 @@ class AssignValuesViewController: UIViewController {
     @IBOutlet weak var ContentViewHeight: NSLayoutConstraint!
     @IBOutlet weak var ContentView: UIView!
     
+    var sliderLabelPair = [UISlider:UILabel]()
+    
     var statSwitch = [String:UISwitch]()
     
-    var sliderPercentages = [String:UILabel]()
+    var sliderPercentages = [String:String]()
     
     var stats:Stats!
     
@@ -84,6 +86,8 @@ class AssignValuesViewController: UIViewController {
                 //add view to horizontal stack view
                 statStackView.addArrangedSubview(labelView)
                 
+                
+                
                 let percentView = UIView(frame: CGRect(x: 0, y: 0, width: StackView.frame.width * 0.25, height: 85))
                 percentView.backgroundColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
                 //Create/Add label for percent to view.
@@ -92,7 +96,7 @@ class AssignValuesViewController: UIViewController {
                 percentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 20)
                 percentLabel.textAlignment = NSTextAlignment.center
                 percentLabel.text = "50%"
-                sliderPercentages.updateValue(percentLabel, forKey: stat)
+                sliderPercentages.updateValue(percentLabel.text!, forKey: stat)
                 percentView.addSubview(percentLabel)
                 percentLabel.translatesAutoresizingMaskIntoConstraints = false
                 //add constraints to view for label
@@ -121,6 +125,8 @@ class AssignValuesViewController: UIViewController {
                 slider.addTarget(self, action: #selector(sliderValueChanged(sender:)), for: .valueChanged)
                 sliderView.addSubview(slider)
                 
+                sliderLabelPair[slider] = percentLabel
+                
                 statStackView.addConstraints([labelViewTrailingConstraint, labelViewLeadingConstraint])
 
                 fullStackView.addArrangedSubview(sliderView)
@@ -140,8 +146,8 @@ class AssignValuesViewController: UIViewController {
     
     @objc func sliderValueChanged (sender: UISlider) {
         let formatValue = String(format: "%.0f", sender.value)
-        sliderPercentages[stats.stat_fields[sender.tag]]?.text = "\(formatValue)%"
-        
+        sliderPercentages.updateValue("\(formatValue)%", forKey: stats.stat_fields[sender.tag])
+        sliderLabelPair[sender]?.text = "\(formatValue)%"
     }
     
     

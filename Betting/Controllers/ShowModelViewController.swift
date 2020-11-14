@@ -16,16 +16,25 @@ class ShowModelViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var modelMaster:ModelMaster!
+    var stats:Stats!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillScreen()
-
+        DispatchQueue.main.async {
+            self.stats.runStats(statsChosen: self.modelMaster.getUserStatsChosen())
+            self.modelMaster.setSeasonStats(stats: self.stats.teamSeasonStats)
+            self.fillScreen()
+        }
+        
         // Do any additional setup after loading the view.
     }
     
     func fillScreen() {
         addLogotToTitleBar()
+        ModelName.text = modelMaster.getModelName()
+        ContentViewHeight.constant = CGFloat( 90 + (modelMaster.getUserStatsChosen().count * 30))
+        populateOverview()
+        populateStats()
         
     }
     
@@ -144,7 +153,133 @@ class ShowModelViewController: UIViewController {
         leagueChosenView.addConstraints([centerXConst,centerYConst])
     }
     
-   
+    func populateStats() {
+        
+        let statsSubTitleView = UIView()
+        statsSubTitleView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        
+        MainStack.addArrangedSubview(statsSubTitleView)
+        
+        statsSubTitleView.translatesAutoresizingMaskIntoConstraints = false
+        var heightConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        var trailingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
+        var leadingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+        
+        MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+        
+        let statsAndValuesLabel = UILabel()
+        statsAndValuesLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        statsAndValuesLabel.textAlignment = .center
+        statsAndValuesLabel.text = "Stats and Values"
+        statsSubTitleView.addSubview(statsAndValuesLabel)
+        
+        statsAndValuesLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        var centerXConst = NSLayoutConstraint(item: statsAndValuesLabel, attribute: .centerX, relatedBy: .equal, toItem: statsSubTitleView, attribute: .centerX, multiplier: 1, constant: 0)
+        var centerYConst = NSLayoutConstraint(item: statsAndValuesLabel, attribute: .centerY, relatedBy: .equal, toItem: statsSubTitleView, attribute: .centerY, multiplier: 1, constant: 0)
+        
+        statsSubTitleView.addConstraints([centerXConst,centerYConst])
+        
+        //
+        //
+        //
+        // Iterate through every stat chosen to place them one at a time
+        //
+        //
+        //
+        
+        let userData = modelMaster.getUserStatsChosen()
+        
+        for (stat, value) in userData {
+            
+            /*
+             Create Stack View for the stat name and value chosen
+             */
+            let statStackView = UIStackView()
+            statStackView.axis = .horizontal
+            statStackView.distribution = .fill
+            statStackView.spacing = 1
+            
+            MainStack.addArrangedSubview(statStackView)
+            
+            statStackView.translatesAutoresizingMaskIntoConstraints = false
+            
+            trailingConst = NSLayoutConstraint(item: statStackView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
+            leadingConst = NSLayoutConstraint(item: statStackView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+            heightConst  = NSLayoutConstraint(item: statStackView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+            
+            MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+            
+            /*
+             Create view for the League label
+             */
+            let statView = UIView()
+            statView.backgroundColor = #colorLiteral(red: 0.7428528666, green: 0.7330520749, blue: 0.7115116715, alpha: 1)
+            
+            statStackView.addArrangedSubview(statView)
+            
+            statView.translatesAutoresizingMaskIntoConstraints = false
+            
+            leadingConst = NSLayoutConstraint(item: statView, attribute: .leading, relatedBy: .equal, toItem: statStackView, attribute: .leading, multiplier: 1, constant: 0)
+            trailingConst = NSLayoutConstraint(item: statView, attribute: .trailing, relatedBy: .equal, toItem: statStackView, attribute: .trailing, multiplier: 1, constant: -125)
+            let topConst = NSLayoutConstraint(item: statView, attribute: .top, relatedBy: .equal, toItem: statStackView, attribute: .top, multiplier: 1, constant: 0)
+            let bottomConst = NSLayoutConstraint(item: statView, attribute: .bottom, relatedBy: .equal, toItem: statStackView, attribute: .bottom, multiplier: 1, constant: 0)
+            
+            statStackView.addConstraints([leadingConst,trailingConst,topConst,bottomConst])
+            
+            /*
+             Add label to view that says "League :
+             */
+            let statLabel = UILabel()
+            statLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            statLabel.textAlignment = .left
+            statLabel.text = stat
+            statView.addSubview(statLabel)
+            
+            statLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            leadingConst = NSLayoutConstraint(item: statLabel, attribute: .leading, relatedBy: .equal, toItem: statView, attribute: .leading, multiplier: 1, constant: 25)
+            centerYConst = NSLayoutConstraint(item: statLabel, attribute: .centerY, relatedBy: .equal, toItem: statView, attribute: .centerY, multiplier: 1, constant: 0)
+            
+            statView.addConstraints([leadingConst,centerYConst])
+            
+            /*
+             Create view for the League Chosen label
+             */
+            let statValueView = UIView()
+            statValueView.backgroundColor = #colorLiteral(red: 0.7428528666, green: 0.7330520749, blue: 0.7115116715, alpha: 1)
+            
+            statStackView.addArrangedSubview(statValueView)
+            
+            /*
+             Add label to view that defines league chosen
+             */
+            let statValueLabel = UILabel()
+            statValueLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            statValueLabel.textAlignment = .left
+            statValueLabel.text = value
+            statValueView.addSubview(statValueLabel)
+            
+            statValueLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            centerXConst = NSLayoutConstraint(item: statValueLabel, attribute: .centerX, relatedBy: .equal, toItem: statValueView, attribute: .centerX, multiplier: 1, constant: 0)
+            centerYConst = NSLayoutConstraint(item: statValueLabel, attribute: .centerY, relatedBy: .equal, toItem: statValueView, attribute: .centerY, multiplier: 1, constant: 0)
+            
+            statValueView.addConstraints([centerXConst,centerYConst])
+        }
+    }
+    
+    @IBAction func runModelPressed(_ sender: Any) {
+        performSegue(withIdentifier: "ShowResultsSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowResultsSegue" {
+            let destinationVC = segue.destination as! ResultsSavedModelViewController
+            destinationVC.modelMaster = modelMaster
+        }
+    }
+    
     
     /*
     // MARK: - Navigation

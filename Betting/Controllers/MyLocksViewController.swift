@@ -18,6 +18,8 @@ class MyLocksViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var models:[Model]?
+    let modelMaster = ModelMaster()
+    let stats = Stats()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +67,22 @@ class MyLocksViewController: UIViewController {
 extension MyLocksViewController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let savedModels = try! context.fetch(Model.fetchRequest())
+        let model = savedModels[indexPath.row] as! Model
         
+        modelMaster.setLeague(league: model.league!)
+        modelMaster.setUserStatData(stats: model.stats!)
+        modelMaster.setModelName(name: model.name!)
+        performSegue(withIdentifier: "ShowModelSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowModelSegue" {
+            let destionationVC = segue.destination as! ShowModelViewController
+            destionationVC.stats = stats
+            destionationVC.modelMaster = modelMaster
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

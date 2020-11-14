@@ -33,12 +33,12 @@ class SaveModelViewController: UIViewController, UITextFieldDelegate {
         newModel.league = modelMaster.getLeague()
         
         //UserStatsChosen need to be changed from String:UILabel to String:String
-        var userStats = [String:String]()
-        for (key,value) in modelMaster.getUserStatsChosen() {
-            userStats[key] = value.text!
-        }
-        print(userStats)
-        newModel.stats = userStats
+//        var userStats = [String:String]()
+//        for (key,value) in modelMaster.getUserStatsChosen() {
+//            userStats[key] = value.text!
+//        }
+//        print(userStats)
+        newModel.stats = modelMaster.getUserStatsChosen()
         //save model to core data
         do {
             try self.context.save()
@@ -291,7 +291,7 @@ class SaveModelViewController: UIViewController, UITextFieldDelegate {
             let statValueLabel = UILabel()
             statValueLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             statValueLabel.textAlignment = .left
-            statValueLabel.text = value.text
+            statValueLabel.text = value
             statValueView.addSubview(statValueLabel)
             
             statValueLabel.translatesAutoresizingMaskIntoConstraints = false

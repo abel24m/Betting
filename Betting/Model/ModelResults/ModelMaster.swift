@@ -17,20 +17,18 @@ class ModelMaster{
     
     private var currentWeek = 0
     private var weekMatchupData = [WeekMatchUpData]()
-    private var userModelData = [String:UILabel]()
+    private var userModelData = [String:String]()
     private var seasonStats = [String:NFLTeamSeasonStats]()
     public var modelResults = [WeekMatchUpModel]()
     
     private var league = ""
+    private var modelName = ""
     
     let session = URLSession(configuration: .default)
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
-        print("Created Model Master")
-        
-        
     }
     
     func setLeague(league: String) {
@@ -46,7 +44,15 @@ class ModelMaster{
         return league
     }
     
-    func setUserStatData(stats: [String:UILabel]){
+    func setModelName(name : String)  {
+        modelName = name
+    }
+    
+    func getModelName() -> String {
+        return modelName
+    }
+    
+    func setUserStatData(stats: [String:String]){
         userModelData = stats
     }
     
@@ -54,7 +60,7 @@ class ModelMaster{
         seasonStats = stats
     }
     
-    func getUserStatsChosen() -> [String:UILabel] {
+    func getUserStatsChosen() -> [String:String] {
         return userModelData
     }
     
@@ -72,80 +78,83 @@ class ModelMaster{
 //    }
     
     func runModel() {
+        modelResults.removeAll()
         for matchup in weekMatchupData{
-            if matchup.Status != "Scheduled"{
-                continue
-            }
-            var newMatchUpModel = WeekMatchUpModel()
-            let hometeam = seasonStats[matchup.HomeTeam!]!
-            let awayteam = seasonStats[matchup.AwayTeam!]!
-            newMatchUpModel.HomeTeam = hometeam.TeamName
-            newMatchUpModel.AwayTeam = awayteam.TeamName
-            for (stat, value) in userModelData {
-                let trueValue = convertToDecimal(label: value)
-                switch stat {
-                case "Average Points Per Game":
-                    var avgPPG_ModelResults = [String:Double]()
-                    let diff = abs(hometeam.AveragePointsPerGame - awayteam.AveragePointsPerGame)
-                    let modelPoints = (diff * 0.29) * trueValue
-                    let winningTeam = hometeam.AveragePointsPerGame > awayteam.AveragePointsPerGame ? hometeam.TeamName : awayteam.TeamName
-                    if winningTeam == hometeam.TeamName {
-                        newMatchUpModel.Home_ModelScore += modelPoints
-                    }else{
-                        newMatchUpModel.Away_ModelScore += modelPoints
+            if matchup.Status == "Scheduled" || matchup.Status == "InProgress" {
+                var newMatchUpModel = WeekMatchUpModel()
+                print(seasonStats)
+                print("----------------------")
+                print(matchup)
+                let hometeam = seasonStats[matchup.HomeTeam!]!
+                let awayteam = seasonStats[matchup.AwayTeam!]!
+                newMatchUpModel.HomeTeam = hometeam.TeamName
+                newMatchUpModel.AwayTeam = awayteam.TeamName
+                for (stat, value) in userModelData {
+                    let trueValue = convertToDecimal(label: value)
+                    switch stat {
+                    case "Average Points Per Game":
+                        var avgPPG_ModelResults = [String:Double]()
+                        let diff = abs(hometeam.AveragePointsPerGame - awayteam.AveragePointsPerGame)
+                        let modelPoints = (diff * 0.29) * trueValue
+                        let winningTeam = hometeam.AveragePointsPerGame > awayteam.AveragePointsPerGame ? hometeam.TeamName : awayteam.TeamName
+                        if winningTeam == hometeam.TeamName {
+                            newMatchUpModel.Home_ModelScore += modelPoints
+                        }else{
+                            newMatchUpModel.Away_ModelScore += modelPoints
+                        }
+                        avgPPG_ModelResults.updateValue(modelPoints, forKey: winningTeam)
+                        newMatchUpModel.AvgPPG_Results = avgPPG_ModelResults
+                    case "Average Points Against":
+                        var avgPPGAgainst_ModelResults = [String:Double]()
+                        let diff = abs(hometeam.AveragePointsAgainst - awayteam.AveragePointsAgainst)
+                        let modelPoints = (diff * 0.29) * trueValue
+                        let winningTeam = hometeam.AveragePointsAgainst < awayteam.AveragePointsAgainst ? hometeam.TeamName : awayteam.TeamName
+                        if winningTeam == hometeam.TeamName {
+                            newMatchUpModel.Home_ModelScore += modelPoints
+                        }else{
+                            newMatchUpModel.Away_ModelScore += modelPoints
+                        }
+                        avgPPGAgainst_ModelResults.updateValue(modelPoints, forKey: winningTeam)
+                        newMatchUpModel.AvgPA_Results = avgPPGAgainst_ModelResults
+                    case "Average Time of Possesion":
+                        var avgTOP_ModelResults = [String:Double]()
+                        let diff = abs(hometeam.AverageTimeOfPossesion - awayteam.AverageTimeOfPossesion)
+                        let modelPoints = (Double(diff) * 0.01) * trueValue
+                        let winningTeam = hometeam.AverageTimeOfPossesion > awayteam.AverageTimeOfPossesion ? hometeam.TeamName : awayteam.TeamName
+                        if winningTeam == hometeam.TeamName {
+                            newMatchUpModel.Home_ModelScore += modelPoints
+                        }else{
+                            newMatchUpModel.Away_ModelScore += modelPoints
+                        }
+                        avgTOP_ModelResults.updateValue(modelPoints, forKey: winningTeam)
+                        newMatchUpModel.AvgTOP_Results = avgTOP_ModelResults
+                    case "Redzone Attempts Per Game":
+                        var redzoneAPG_ModelResults = [String:Double]()
+                        let diff = abs(hometeam.RedZoneAttemptsPerGame - awayteam.RedZoneAttemptsPerGame)
+                        let modelPoints = (Double(diff) * 2) * trueValue
+                        let winningTeam = hometeam.RedZoneAttemptsPerGame > awayteam.RedZoneAttemptsPerGame ? hometeam.TeamName : awayteam.TeamName
+                        if winningTeam == hometeam.TeamName {
+                            newMatchUpModel.Home_ModelScore += modelPoints
+                        }else{
+                            newMatchUpModel.Away_ModelScore += modelPoints
+                        }
+                        redzoneAPG_ModelResults.updateValue(modelPoints, forKey: winningTeam)
+                        newMatchUpModel.RedZone_Results = redzoneAPG_ModelResults
+                    default:
+                        continue
                     }
-                    avgPPG_ModelResults.updateValue(modelPoints, forKey: winningTeam)
-                    newMatchUpModel.AvgPPG_Results = avgPPG_ModelResults
-                case "Average Points Against":
-                    var avgPPGAgainst_ModelResults = [String:Double]()
-                    let diff = abs(hometeam.AveragePointsAgainst - awayteam.AveragePointsAgainst)
-                    let modelPoints = (diff * 0.29) * trueValue
-                    let winningTeam = hometeam.AveragePointsAgainst < awayteam.AveragePointsAgainst ? hometeam.TeamName : awayteam.TeamName
-                    if winningTeam == hometeam.TeamName {
-                        newMatchUpModel.Home_ModelScore += modelPoints
-                    }else{
-                        newMatchUpModel.Away_ModelScore += modelPoints
-                    }
-                    avgPPGAgainst_ModelResults.updateValue(modelPoints, forKey: winningTeam)
-                    newMatchUpModel.AvgPA_Results = avgPPGAgainst_ModelResults
-                case "Average Time of Possesion":
-                    var avgTOP_ModelResults = [String:Double]()
-                    let diff = abs(hometeam.AverageTimeOfPossesion - awayteam.AverageTimeOfPossesion)
-                    let modelPoints = (Double(diff) * 0.01) * trueValue
-                    let winningTeam = hometeam.AverageTimeOfPossesion > awayteam.AverageTimeOfPossesion ? hometeam.TeamName : awayteam.TeamName
-                    if winningTeam == hometeam.TeamName {
-                        newMatchUpModel.Home_ModelScore += modelPoints
-                    }else{
-                        newMatchUpModel.Away_ModelScore += modelPoints
-                    }
-                    avgTOP_ModelResults.updateValue(modelPoints, forKey: winningTeam)
-                    newMatchUpModel.AvgTOP_Results = avgTOP_ModelResults
-                case "Redzone Attempts Per Game":
-                    var redzoneAPG_ModelResults = [String:Double]()
-                    let diff = abs(hometeam.RedZoneAttemptsPerGame - awayteam.RedZoneAttemptsPerGame)
-                    let modelPoints = (Double(diff) * 2) * trueValue
-                    let winningTeam = hometeam.RedZoneAttemptsPerGame > awayteam.RedZoneAttemptsPerGame ? hometeam.TeamName : awayteam.TeamName
-                    if winningTeam == hometeam.TeamName {
-                        newMatchUpModel.Home_ModelScore += modelPoints
-                    }else{
-                        newMatchUpModel.Away_ModelScore += modelPoints
-                    }
-                    redzoneAPG_ModelResults.updateValue(modelPoints, forKey: winningTeam)
-                    newMatchUpModel.RedZone_Results = redzoneAPG_ModelResults
-                default:
-                    continue
                 }
+                newMatchUpModel.Winner = newMatchUpModel.Home_ModelScore > newMatchUpModel.Away_ModelScore ? hometeam.TeamName : awayteam.TeamName
+                let total = newMatchUpModel.Home_ModelScore + newMatchUpModel.Away_ModelScore
+                newMatchUpModel.Home_Percentage = newMatchUpModel.Home_ModelScore / total
+                newMatchUpModel.Away_Percentage = newMatchUpModel.Away_ModelScore / total
+                modelResults.append(newMatchUpModel)
             }
-            newMatchUpModel.Winner = newMatchUpModel.Home_ModelScore > newMatchUpModel.Away_ModelScore ? hometeam.TeamName : awayteam.TeamName
-            let total = newMatchUpModel.Home_ModelScore + newMatchUpModel.Away_ModelScore
-            newMatchUpModel.Home_Percentage = newMatchUpModel.Home_ModelScore / total
-            newMatchUpModel.Away_Percentage = newMatchUpModel.Away_ModelScore / total
-            modelResults.append(newMatchUpModel)
         }
     }
     
-    private func convertToDecimal(label: UILabel) -> Double {
-        let number = label.text!.components(separatedBy: "%")
+    private func convertToDecimal(label: String) -> Double {
+        let number = label.components(separatedBy: "%")
         let value = Double(number[0])! / 100.0
         return value
     }
@@ -185,7 +194,6 @@ class ModelMaster{
             while currentWeek == 0{
 
             }
-            print(currentWeek)
         }
     }
     
@@ -198,7 +206,6 @@ class ModelMaster{
         while weekMatchupData.count == 0{
             
         }
-        print(weekMatchupData)
     }
     
     private func performRequest(urlString: String) {

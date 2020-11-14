@@ -21,7 +21,10 @@ class Stats {
     
     
     init() {
-        getTeamSeasonStats()
+        DispatchQueue.main.async {
+            self.getTeamSeasonStats()
+        }
+        
     }
     
     func statsChosen(statsChosen: [String:UISwitch]) {
@@ -44,7 +47,26 @@ class Stats {
         }
     }
     
+    func runStats(statsChosen: [String:String]) {
+        for (stat, value) in statsChosen{
+            switch stat {
+            case "Average Points Per Game":
+                calculateAveragePointsPerGame()
+            case "Average Points Against":
+                calculateAveragePointsAgainst()
+            case "Average Time of Possesion":
+                calculateAverageTimeOfPossesion()
+            case "Redzone Attempts Per Game":
+                calculateRedZoneAttemptsPerGame()
+            default:
+                continue
+            }
+            
+        }
+    }
+    
     private func calculateAveragePointsPerGame(){
+        
         for teamData in teamSeasonData {
             if var teamStats = teamSeasonStats[teamData.Team]{
                 teamStats.AveragePointsPerGame = Double(teamData.Score) / Double(teamData.Games)
@@ -120,6 +142,7 @@ class Stats {
     
     private func performRequest(urlString: String) {
         
+        
         if let url = URL(string: urlString){
             
             let session = URLSession(configuration: .default)
@@ -130,6 +153,7 @@ class Stats {
     }
     
     private func handle(data: Data?, response: URLResponse?, error: Error?) {
+        print("Abel- Got to handle")
         
         if error != nil{
             print(error!)
@@ -142,6 +166,7 @@ class Stats {
     }
     
     private func parseJSON(seasonTeamData: Data) {
+        print("Abel got to parseJSON")
         let decoder = JSONDecoder()
         do {
             teamSeasonData = try decoder.decode([NFLTeamSeasonData].self, from: seasonTeamData)

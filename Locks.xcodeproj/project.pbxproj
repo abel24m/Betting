@@ -19,6 +19,8 @@
 		C12974462558CD5F00259C7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C12974452558CD5F00259C7A /* LaunchScreen.storyboard */; };
 		C16A11D92555B5620096BEAF /* LocksCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C16A11D72555B5620096BEAF /* LocksCoreData.xcdatamodeld */; };
 		C16A11DC255608EE0096BEAF /* SaveModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */; };
+		C19AF003255F148E00019CE2 /* ResultsSavedModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AF002255F148E00019CE2 /* ResultsSavedModelViewController.swift */; };
+		C19AF00925606E2D00019CE2 /* Notes in Resources */ = {isa = PBXBuildFile; fileRef = C19AF00825606E2C00019CE2 /* Notes */; };
 		C1A9C34F251DB50800A4FDA4 /* AssignValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */; };
 		C1C2FF012550AEC60006F8A4 /* MyLocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */; };
 		C1C519A0253FCD36005D7733 /* NFLTeamSeasonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C5199F253FCD36005D7733 /* NFLTeamSeasonData.swift */; };
@@ -45,6 +47,8 @@
 		C12974452558CD5F00259C7A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C16A11D82555B5620096BEAF /* LocksCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocksCoreData.xcdatamodel; sourceTree = "<group>"; };
 		C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveModelViewController.swift; sourceTree = "<group>"; };
+		C19AF002255F148E00019CE2 /* ResultsSavedModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsSavedModelViewController.swift; sourceTree = "<group>"; };
+		C19AF00825606E2C00019CE2 /* Notes */ = {isa = PBXFileReference; lastKnownFileType = text; path = Notes; sourceTree = "<group>"; };
 		C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignValuesViewController.swift; sourceTree = "<group>"; };
 		C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocksViewController.swift; sourceTree = "<group>"; };
 		C1C5199F253FCD36005D7733 /* NFLTeamSeasonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFLTeamSeasonData.swift; sourceTree = "<group>"; };
@@ -112,6 +116,7 @@
 		C1F8F84F2507377100EB1FFC = {
 			isa = PBXGroup;
 			children = (
+				C19AF00825606E2C00019CE2 /* Notes */,
 				C1CE1BD8255DAA190023344F /* Model+CoreDataClass.swift */,
 				C1CE1BD9255DAA190023344F /* Model+CoreDataProperties.swift */,
 				C1F8F85A2507377200EB1FFC /* Betting */,
@@ -145,15 +150,16 @@
 		C1FB634A251DB40700A7F53E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C1F8F85F2507377200EB1FFC /* StatsChooseViewController.swift */,
-				C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */,
 				C101807E2540993800795C4E /* StartModelController.swift */,
 				C10180812540A17200795C4E /* ChooseLeagueController.swift */,
+				C1F8F85F2507377200EB1FFC /* StatsChooseViewController.swift */,
+				C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */,
 				C10180842540A89A00795C4E /* ModelResultsController.swift */,
 				C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */,
 				C16A11DB255608EE0096BEAF /* SaveModelViewController.swift */,
 				C12974312558C09800259C7A /* LaunchScreenViewController.swift */,
 				C1114589255C72E4000561DB /* ShowModelViewController.swift */,
+				C19AF002255F148E00019CE2 /* ResultsSavedModelViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -218,6 +224,7 @@
 			files = (
 				C12974462558CD5F00259C7A /* LaunchScreen.storyboard in Resources */,
 				C1F8F8652507377400EB1FFC /* Assets.xcassets in Resources */,
+				C19AF00925606E2D00019CE2 /* Notes in Resources */,
 				C1F8F8632507377200EB1FFC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -237,6 +244,7 @@
 				C1C2FF012550AEC60006F8A4 /* MyLocksViewController.swift in Sources */,
 				C1F8F870250737B900EB1FFC /* Stats.swift in Sources */,
 				C101808E2540CCD100795C4E /* WeekMatchUpData.swift in Sources */,
+				C19AF003255F148E00019CE2 /* ResultsSavedModelViewController.swift in Sources */,
 				C1F8F85C2507377200EB1FFC /* AppDelegate.swift in Sources */,
 				C1F8F85E2507377200EB1FFC /* SceneDelegate.swift in Sources */,
 				C16A11DC255608EE0096BEAF /* SaveModelViewController.swift in Sources */,

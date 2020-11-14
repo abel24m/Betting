@@ -1,0 +1,37 @@
+
+//
+//  File.swift
+//  Locks
+//
+//  Created by Abel Moreno on 11/13/20.
+//  Copyright © 2020 Abel Moreno. All rights reserved.
+//
+
+import Foundation
+
+
+ModelResultsGenerator{
+    
+    
+    
+    
+    Stats Chosen [String:String] == [Stat:Value]
+    League
+    SeasonData = [TeamSeasonData]
+    MatchupData = [WeekMatchupData]
+    ModelResults = [MatchupModelResults]
+    
+    init(stats, league){
+        
+    }
+    
+    
+    func run() {
+        //Seasondata and MatchupData
+        PullSeasonData()
+        PullMatchupData()
+        GenerateMatchupStats() // array of [[HomeTeamsStats,AwayTeamStats]]
+        GenerateResults() // returns ModelResults
+    }
+
+}

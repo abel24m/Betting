@@ -1,49 +1,32 @@
 //
-//  ModelResultsController.swift
-//  Betting
+//  ResultsSavedModelViewController.swift
+//  Locks
 //
-//  Created by Abel Moreno on 10/21/20.
+//  Created by Abel Moreno on 11/13/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 
 import UIKit
 
-class ModelResultsController: UIViewController {
-    
+class ResultsSavedModelViewController: UIViewController {
+
     @IBOutlet weak var ResultStackView: UIStackView!
-    @IBOutlet weak var ContentViewHeighConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     
     var modelMaster:ModelMaster!
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
             self.modelMaster.runModel()
             self.populateResults()
         }
-        
+
         // Do any additional setup after loading the view.
     }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "SaveModelSegue"){
-            let destinationVC = segue.destination as! SaveModelViewController
-            destinationVC.modelMaster = modelMaster
-        }
-    }
-    
-
-    @IBAction func SaveModelPressed(_ sender: Any) {
-        performSegue(withIdentifier: "SaveModelSegue", sender: self)
-    }
-    
-    
-    @IBAction func NewModelPressed(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    
     
     
     func addLogoToTitleBar() {
@@ -55,7 +38,7 @@ class ModelResultsController: UIViewController {
     
     
     func populateResults() {
-        ContentViewHeighConstraint.constant = CGFloat(200 * modelMaster.modelResults.count)
+        contentViewHeight.constant = CGFloat(200 * modelMaster.modelResults.count)
         for matchup in modelMaster.modelResults{
             
             let matchupStackView = UIStackView()
@@ -371,6 +354,7 @@ class ModelResultsController: UIViewController {
         
     }
     
+
     /*
     // MARK: - Navigation
 
