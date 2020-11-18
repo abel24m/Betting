@@ -19,7 +19,6 @@ class MyLocksViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var models:[Model]?
     let modelMaster = ModelMaster()
-    let stats = Stats()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,16 +70,20 @@ extension MyLocksViewController : UITableViewDelegate{
         let model = savedModels[indexPath.row] as! Model
         
         modelMaster.setLeague(league: model.league!)
-        modelMaster.setUserStatData(stats: model.stats!)
+        modelMaster.setUserModelParameters(params: model.parameters!)
         modelMaster.setModelName(name: model.name!)
         performSegue(withIdentifier: "ShowModelSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowModelSegue" {
-            let destionationVC = segue.destination as! ShowModelViewController
-            destionationVC.stats = stats
-            destionationVC.modelMaster = modelMaster
+            let destinationVC = segue.destination as! ShowModelViewController
+            var league : League!
+            if modelMaster.getLeague() == "NFL"{
+                league = NFL()
+                destinationVC.league = league as! NFL
+            }
+            destinationVC.modelMaster = modelMaster
             
         }
     }

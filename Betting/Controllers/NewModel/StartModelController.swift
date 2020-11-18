@@ -1,5 +1,5 @@
 //
-//  ChooseLeagueController.swift
+//  StartModelController.swift
 //  Betting
 //
 //  Created by Abel Moreno on 10/21/20.
@@ -8,42 +8,40 @@
 
 import UIKit
 
-class ChooseLeagueController: UIViewController {
-    
-    var modelMaster:ModelMaster!
+class StartModelController: UIViewController {
 
+    @IBOutlet weak var TitleBar: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+
         // Do any additional setup after loading the view.
     }
     
-    func fillScreen() {
-        addLogoToTitleBar()
-    }
-    
-    func addLogoToTitleBar(){
+    func addLogoToTitleBar() {
         let title = #imageLiteral(resourceName: "Locks")
         let titleImageView = UIImageView(image: title)
         titleImageView.contentMode = .scaleAspectFit
-        self.navigationItem.titleView = titleImageView
+        TitleBar.titleView = titleImageView
     }
     
-
-    @IBAction func NflLeaguePressed(_ sender: UIButton) {
-        modelMaster.setLeague(league: "NFL")
-        performSegue(withIdentifier: "ChooseStatsSegue", sender: self)
+    @IBAction func CreateAModelButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "ChooseLeagueSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ChooseStatsSegue"){
-            let destinationVC = segue.destination as! StatsChooseController
+        if (segue.identifier == "ChooseLeagueSegue"){
+            let destinationVC = segue.destination as! ChooseLeagueController
+            let modelMaster = ModelMaster()
             destinationVC.modelMaster = modelMaster
         }
     }
     
-    /*
-    // MARK: - Navigation
+    
+    
+
+    /*// MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

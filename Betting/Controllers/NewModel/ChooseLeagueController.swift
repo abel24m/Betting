@@ -1,5 +1,5 @@
 //
-//  StartModelController.swift
+//  ChooseLeagueController.swift
 //  Betting
 //
 //  Created by Abel Moreno on 10/21/20.
@@ -8,36 +8,46 @@
 
 import UIKit
 
-class StartModelController: UIViewController {
-
-    @IBOutlet weak var TitleBar: UINavigationItem!
+class ChooseLeagueController: UIViewController {
     
+    var modelMaster:ModelMaster!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let title = #imageLiteral(resourceName: "Locks")
-        let titleImageView = UIImageView(image: title)
-        titleImageView.contentMode = .scaleAspectFit
-        TitleBar.titleView = titleImageView
-
+        
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func CreateAModelButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "ChooseLeagueSegue", sender: self)
+    var league: League!
+    
+    func fillScreen() {
+        addLogoToTitleBar()
+    }
+    
+    func addLogoToTitleBar(){
+        let title = #imageLiteral(resourceName: "Locks")
+        let titleImageView = UIImageView(image: title)
+        titleImageView.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = titleImageView
+    }
+    
+
+    @IBAction func NflLeaguePressed(_ sender: UIButton) {
+        modelMaster.setLeague(league: "NFL")
+        league = NFL()
+        performSegue(withIdentifier: "ChooseStatsSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "ChooseLeagueSegue"){
-            let destinationVC = segue.destination as! ChooseLeagueController
-            let modelMaster = ModelMaster()
+        if (segue.identifier == "ChooseStatsSegue"){
+            let destinationVC = segue.destination as! StatsChooseController
+            destinationVC.league = league
             destinationVC.modelMaster = modelMaster
         }
     }
     
-    
-    
-
-    /*// MARK: - Navigation
+    /*
+    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

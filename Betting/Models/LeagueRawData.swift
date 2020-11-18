@@ -1,14 +1,20 @@
 //
-//  TeamSeasonData.swift
-//  Betting
+//  LeagueRawData.swift
+//  Locks
 //
-//  Created by Abel Moreno on 10/20/20.
+//  Created by Abel Moreno on 11/14/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 
 import Foundation
 
-struct NFLTeamSeasonData: Decodable {
+//This file is gonna be used to store the struct objects being used to parse the json files coming through our api.
+
+/*
+ This Struct is not complete with all the possible variables that comes
+ from the api get call
+ */
+struct NFLTeamSeasonRawData: Decodable {
     let SeasonType: Int
     let Season: Int
     let Team: String
@@ -85,4 +91,12 @@ struct NFLTeamSeasonData: Decodable {
     let TeamStatID: Int
 }
 
+struct NFLWeeklyMatchUpRawData: Decodable {
+    let GameKey: String?
+    let Date: String?
+    let AwayTeam : String?
+    let HomeTeam : String?
+    let Channel : String?
+    let Status: String?
+}
 

@@ -1,14 +1,21 @@
 //
-//  WeekMatchUpModel.swift
-//  Betting
+//  LeagueMatchupResults.swift
+//  Locks
 //
-//  Created by Abel Moreno on 10/21/20.
+//  Created by Abel Moreno on 11/14/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 
 import Foundation
 
-struct WeekMatchUpModel {
+protocol MatchUpResults {
+    var HomeTeam : String {get set}
+    var AwayTeam : String {get set}
+    var Home_Percentage : Double {get}
+    var Away_Percentage : Double {get}
+}
+
+struct NFLMatchUp : MatchUpResults {    
     var HomeTeam : String
     var AwayTeam : String
     var Home_ModelScore : Double
@@ -35,5 +42,9 @@ struct WeekMatchUpModel {
         RedZone_Results = [String:Double]()
         
     }
+    
+}
+
+struct NBAMatchup {
     
 }

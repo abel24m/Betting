@@ -13,9 +13,12 @@ class StatsChooseController: UIViewController {
     
     
     var statSwitches = [String:UISwitch]()
+    
     var modelMaster:ModelMaster!
     
-    var stats = Stats()
+    var league: League!
+
+    
     
     @IBOutlet weak var ContentView: UIView!
     @IBOutlet weak var StackView: UIStackView!
@@ -42,16 +45,26 @@ class StatsChooseController: UIViewController {
     
     
     @IBAction func DonePressed(_ sender: UIButton) {
-        stats.statsChosen(statsChosen: statSwitches)
+        setStatsChosen()
         performSegue(withIdentifier: "AssignValuesSegue", sender: self)
+    }
+    
+    private func setStatsChosen(){
+        var statschosen = [String:String]()
+        for stat in league.stats {
+            if statSwitches[stat]!.isOn{
+                statschosen[stat] = ""
+            }
+        }
+        modelMaster.setUserModelParameters(params: statschosen)
     }
     
 
     
     func populateStats() {
-        let constant = (CGFloat)(stats.stat_fields.count * 100)
+        let constant = (CGFloat)(league.stats.count * 100)
         ContentHeightConstraint.constant = constant
-        for stat in stats.stat_fields{
+        for stat in league.stats{
             //create horizontal stack for stat field and switch
             let statStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: StackView.frame.width, height: 100))
             statStackView.axis = .horizontal
@@ -113,9 +126,7 @@ class StatsChooseController: UIViewController {
         if (segue.identifier == "AssignValuesSegue"){
             let destinationVC = segue.destination as! AssignValuesViewController
             destinationVC.modelMaster = modelMaster
-            destinationVC.statSwitch = statSwitches
-            destinationVC.stats = stats
-            print("Preparing for segue")
+            destinationVC.league = league
         }
     }
     

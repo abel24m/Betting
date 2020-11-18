@@ -2,7 +2,7 @@
 //  Model+CoreDataClass.swift
 //  Locks
 //
-//  Created by Abel Moreno on 11/12/20.
+//  Created by Abel Moreno on 11/14/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 //

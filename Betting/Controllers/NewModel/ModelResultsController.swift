@@ -13,13 +13,12 @@ class ModelResultsController: UIViewController {
     @IBOutlet weak var ResultStackView: UIStackView!
     @IBOutlet weak var ContentViewHeighConstraint: NSLayoutConstraint!
     
-    
-    var modelMaster:ModelMaster!
+    var resultsGenerator:ResultsGenerator!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
-            self.modelMaster.runModel()
+            self.resultsGenerator.run()
             self.populateResults()
         }
         
@@ -30,7 +29,7 @@ class ModelResultsController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "SaveModelSegue"){
             let destinationVC = segue.destination as! SaveModelViewController
-            destinationVC.modelMaster = modelMaster
+            destinationVC.modelMaster = resultsGenerator.modelMaster
         }
     }
     
@@ -55,8 +54,8 @@ class ModelResultsController: UIViewController {
     
     
     func populateResults() {
-        ContentViewHeighConstraint.constant = CGFloat(200 * modelMaster.modelResults.count)
-        for matchup in modelMaster.modelResults{
+        ContentViewHeighConstraint.constant = CGFloat(200 * resultsGenerator.results.count)
+        for matchup in resultsGenerator.results{
             
             let matchupStackView = UIStackView()
             matchupStackView.axis = .horizontal

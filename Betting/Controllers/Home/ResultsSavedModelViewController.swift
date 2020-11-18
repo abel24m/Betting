@@ -15,13 +15,13 @@ class ResultsSavedModelViewController: UIViewController {
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     
-    var modelMaster:ModelMaster!
+    var resultsGenerator:ResultsGenerator!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
-            self.modelMaster.runModel()
+            self.resultsGenerator.run()
             self.populateResults()
         }
 
@@ -38,8 +38,8 @@ class ResultsSavedModelViewController: UIViewController {
     
     
     func populateResults() {
-        contentViewHeight.constant = CGFloat(200 * modelMaster.modelResults.count)
-        for matchup in modelMaster.modelResults{
+        contentViewHeight.constant = CGFloat(200 * resultsGenerator.results.count)
+        for matchup in resultsGenerator.results{
             
             let matchupStackView = UIStackView()
             matchupStackView.axis = .horizontal

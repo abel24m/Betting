@@ -1,51 +1,77 @@
 //
-//  ShowModelViewController.swift
+//  SaveModelViewController.swift
 //  Locks
 //
-//  Created by Abel Moreno on 11/11/20.
+//  Created by Abel Moreno on 11/6/20.
 //  Copyright © 2020 Abel Moreno. All rights reserved.
 //
 
 import UIKit
 
-class ShowModelViewController: UIViewController {
-    
-    @IBOutlet weak var ModelName: UILabel!
-    @IBOutlet weak var MainStack: UIStackView!
-    @IBOutlet weak var ContentViewHeight: NSLayoutConstraint!
+class SaveModelViewController: UIViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var ContentViewContraint: NSLayoutConstraint!
+    @IBOutlet weak var MainStackView: UIStackView!
+    @IBOutlet weak var NameOfModel: UITextField!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var modelMaster:ModelMaster!
-    var stats:Stats!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-            self.stats.runStats(statsChosen: self.modelMaster.getUserStatsChosen())
-            self.modelMaster.setSeasonStats(stats: self.stats.teamSeasonStats)
-            self.fillScreen()
-        }
-        
+        fillScreen()
+        NameOfModel.delegate = self
+
         // Do any additional setup after loading the view.
     }
     
+    
+    @IBAction func savePressed(_ sender: UIButton) {
+        //create saved model
+        let newModel = Model(context: context)
+        newModel.name = NameOfModel.text
+        newModel.league = modelMaster.getLeague()
+    
+        newModel.parameters = modelMaster.getUserModelParameters()
+        //save model to core data
+        do {
+            try self.context.save()
+        } catch  {
+        
+        }
+        
+        //Jump to the home screen so the user can see the  new model added
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let nextViewController = storyBoard.instantiateViewController(identifier: "TabController") as UITabBarController
+        nextViewController.selectedIndex = 1
+        nextViewController.modalPresentationStyle = .fullScreen
+        self.present(nextViewController, animated: true, completion: nil)
+    }
+    
+   
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
     func fillScreen() {
-        addLogotToTitleBar()
-        ModelName.text = modelMaster.getModelName()
-        ContentViewHeight.constant = CGFloat( 90 + (modelMaster.getUserStatsChosen().count * 30))
-        populateOverview()
-        populateStats()
+        addLogoToTitleBar()
+        ContentViewContraint.constant = CGFloat( 90 + (modelMaster.getUserModelParameters().count * 30))
+        DispatchQueue.main.async {
+            self.populateOverview()
+            self.populateStats()
+        }
         
     }
     
-    func addLogotToTitleBar(){
+    func addLogoToTitleBar() {
         let title = #imageLiteral(resourceName: "Locks")
         let titleImageView = UIImageView(image: title)
         titleImageView.contentMode = .scaleAspectFit
         self.navigationItem.titleView = titleImageView
     }
     
-    func populateOverview() {
+    func populateOverview(){
         //
         //
         //
@@ -56,14 +82,14 @@ class ShowModelViewController: UIViewController {
         let overView = UIView()
         overView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        MainStack.addArrangedSubview(overView)
+        MainStackView.addArrangedSubview(overView)
         
         overView.translatesAutoresizingMaskIntoConstraints = false
         var heightConst = NSLayoutConstraint(item: overView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-        var trailingConst = NSLayoutConstraint(item: overView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
-        var leadingConst = NSLayoutConstraint(item: overView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+        var trailingConst = NSLayoutConstraint(item: overView, attribute: .trailing, relatedBy: .equal, toItem: MainStackView, attribute: .trailing, multiplier: 1, constant: 0)
+        var leadingConst = NSLayoutConstraint(item: overView, attribute: .leading, relatedBy: .equal, toItem: MainStackView, attribute: .leading, multiplier: 1, constant: 0)
         
-        MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+        MainStackView.addConstraints([trailingConst,leadingConst,heightConst])
         
         let overViewLabel = UILabel()
         overViewLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -94,15 +120,15 @@ class ShowModelViewController: UIViewController {
         leagueStackView.distribution = .fillEqually
         leagueStackView.spacing = 0
         
-        MainStack.addArrangedSubview(leagueStackView)
+        MainStackView.addArrangedSubview(leagueStackView)
         
         leagueStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        trailingConst = NSLayoutConstraint(item: leagueStackView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
-        leadingConst = NSLayoutConstraint(item: leagueStackView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+        trailingConst = NSLayoutConstraint(item: leagueStackView, attribute: .trailing, relatedBy: .equal, toItem: MainStackView, attribute: .trailing, multiplier: 1, constant: 0)
+        leadingConst = NSLayoutConstraint(item: leagueStackView, attribute: .leading, relatedBy: .equal, toItem: MainStackView, attribute: .leading, multiplier: 1, constant: 0)
         heightConst  = NSLayoutConstraint(item: leagueStackView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
         
-        MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+        MainStackView.addConstraints([trailingConst,leadingConst,heightConst])
         
         /*
          Create view for the League label
@@ -151,6 +177,8 @@ class ShowModelViewController: UIViewController {
         centerYConst = NSLayoutConstraint(item: leagueChosenLabel, attribute: .centerY, relatedBy: .equal, toItem: leagueChosenView, attribute: .centerY, multiplier: 1, constant: 0)
         
         leagueChosenView.addConstraints([centerXConst,centerYConst])
+        
+        
     }
     
     func populateStats() {
@@ -158,14 +186,14 @@ class ShowModelViewController: UIViewController {
         let statsSubTitleView = UIView()
         statsSubTitleView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        MainStack.addArrangedSubview(statsSubTitleView)
+        MainStackView.addArrangedSubview(statsSubTitleView)
         
         statsSubTitleView.translatesAutoresizingMaskIntoConstraints = false
         var heightConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-        var trailingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
-        var leadingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+        var trailingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .trailing, relatedBy: .equal, toItem: MainStackView, attribute: .trailing, multiplier: 1, constant: 0)
+        var leadingConst = NSLayoutConstraint(item: statsSubTitleView, attribute: .leading, relatedBy: .equal, toItem: MainStackView, attribute: .leading, multiplier: 1, constant: 0)
         
-        MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+        MainStackView.addConstraints([trailingConst,leadingConst,heightConst])
         
         let statsAndValuesLabel = UILabel()
         statsAndValuesLabel.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -188,7 +216,7 @@ class ShowModelViewController: UIViewController {
         //
         //
         
-        let userData = modelMaster.getUserStatsChosen()
+        let userData = modelMaster.getUserModelParameters()
         
         for (stat, value) in userData {
             
@@ -200,15 +228,15 @@ class ShowModelViewController: UIViewController {
             statStackView.distribution = .fill
             statStackView.spacing = 1
             
-            MainStack.addArrangedSubview(statStackView)
+            MainStackView.addArrangedSubview(statStackView)
             
             statStackView.translatesAutoresizingMaskIntoConstraints = false
             
-            trailingConst = NSLayoutConstraint(item: statStackView, attribute: .trailing, relatedBy: .equal, toItem: MainStack, attribute: .trailing, multiplier: 1, constant: 0)
-            leadingConst = NSLayoutConstraint(item: statStackView, attribute: .leading, relatedBy: .equal, toItem: MainStack, attribute: .leading, multiplier: 1, constant: 0)
+            trailingConst = NSLayoutConstraint(item: statStackView, attribute: .trailing, relatedBy: .equal, toItem: MainStackView, attribute: .trailing, multiplier: 1, constant: 0)
+            leadingConst = NSLayoutConstraint(item: statStackView, attribute: .leading, relatedBy: .equal, toItem: MainStackView, attribute: .leading, multiplier: 1, constant: 0)
             heightConst  = NSLayoutConstraint(item: statStackView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
             
-            MainStack.addConstraints([trailingConst,leadingConst,heightConst])
+            MainStackView.addConstraints([trailingConst,leadingConst,heightConst])
             
             /*
              Create view for the League label
@@ -269,18 +297,12 @@ class ShowModelViewController: UIViewController {
         }
     }
     
-    @IBAction func runModelPressed(_ sender: Any) {
-        performSegue(withIdentifier: "ShowResultsSegue", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowResultsSegue" {
-            let destinationVC = segue.destination as! ResultsSavedModelViewController
-            destinationVC.modelMaster = modelMaster
-        }
-    }
     
     
+    
+    
+    
+
     /*
     // MARK: - Navigation
 
