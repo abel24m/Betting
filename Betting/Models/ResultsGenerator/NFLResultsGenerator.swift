@@ -12,7 +12,7 @@ import Foundation
 class NFLResultsGenerator : ResultsGenerator {
 
     var results = [MatchUpResults]()
-    var teamStats = [String:FootballTeam]()
+    var teamStats = [String:NFLTeam]()
     
     var nfl : NFL!
     var modelMaster: ModelMaster
@@ -29,7 +29,7 @@ class NFLResultsGenerator : ResultsGenerator {
         self.results = self.getMatchResults(allTeams: allTeams)
     }
     
-    func getMatchResults(allTeams: [String:FootballTeam]) -> [NFLMatchUp] {
+    func getMatchResults(allTeams: [String:NFLTeam]) -> [NFLMatchUp] {
         var nflMatchups = [NFLMatchUp]()
         let modelParams = modelMaster.getUserModelParameters()
         for matchup in nfl.weeklyMatchupsRawData{
@@ -97,7 +97,7 @@ class NFLResultsGenerator : ResultsGenerator {
     }
     
     
-    func whoWonRedzoneAttemptsPerGame(homeTeam: FootballTeam, awayTeam: FootballTeam, percent: String) -> [String: Double] {
+    func whoWonRedzoneAttemptsPerGame(homeTeam: NFLTeam, awayTeam: NFLTeam, percent: String) -> [String: Double] {
         let value = turnPercentageIntoDecimal(value: percent)
         var avgRedzone_Results = [String:Double]()
         let diff = abs(homeTeam.RedZoneAttemptsPerGame - awayTeam.RedZoneAttemptsPerGame)
@@ -108,7 +108,7 @@ class NFLResultsGenerator : ResultsGenerator {
         
     }
     
-    func whoWonAverageTimeOfPossesion(homeTeam: FootballTeam, awayTeam: FootballTeam, percent: String) -> [String: Double] {
+    func whoWonAverageTimeOfPossesion(homeTeam: NFLTeam, awayTeam: NFLTeam, percent: String) -> [String: Double] {
         let value = turnPercentageIntoDecimal(value: percent)
         var avgTOP_Results = [String:Double]()
         let diff = abs(homeTeam.AverageTimeOfPossesion - awayTeam.AverageTimeOfPossesion)
@@ -118,7 +118,7 @@ class NFLResultsGenerator : ResultsGenerator {
         return avgTOP_Results
     }
     
-    func whoWonAveragePointsAgainst(homeTeam: FootballTeam, awayTeam: FootballTeam, percent: String) -> [String: Double] {
+    func whoWonAveragePointsAgainst(homeTeam: NFLTeam, awayTeam: NFLTeam, percent: String) -> [String: Double] {
         let value = turnPercentageIntoDecimal(value: percent)
         var avgPA_Results = [String:Double]()
         let diff = abs(homeTeam.AveragePointsAgainst - awayTeam.AveragePointsAgainst)
@@ -128,7 +128,7 @@ class NFLResultsGenerator : ResultsGenerator {
         return avgPA_Results
     }
     
-    func whoWonAveragePointsPerGame(homeTeam: FootballTeam, awayTeam: FootballTeam, percent: String) -> [String: Double] {
+    func whoWonAveragePointsPerGame(homeTeam: NFLTeam, awayTeam: NFLTeam, percent: String) -> [String: Double] {
         let value = turnPercentageIntoDecimal(value: percent)
         var avgPPG_Results = [String:Double]()
         let diff = abs(homeTeam.AveragePointsPerGame - awayTeam.AveragePointsPerGame)
@@ -147,10 +147,10 @@ class NFLResultsGenerator : ResultsGenerator {
     
     
     
-    func getTeamStats() -> [String:FootballTeam]{
-        var teams = [String:FootballTeam]()
+    func getTeamStats() -> [String:NFLTeam]{
+        var teams = [String:NFLTeam]()
         for teamData in nfl.teamSeasonRawData{
-            var team = FootballTeam(team : teamData.Team)
+            var team = NFLTeam(team : teamData.Team)
             team.Name = teamData.TeamName
             for stat in modelMaster.getUserModelParameters().keys{
                 switch stat {
@@ -171,15 +171,15 @@ class NFLResultsGenerator : ResultsGenerator {
         return teams
     }
     
-    private func calculateAveragePointsPerGame(data: NFLTeamSeasonRawData) -> Double{
+    private func calculateAveragePointsPerGame(data: NFL_TeamSeasonRawData) -> Double{
         return Double(data.Score) / Double(data.Games)
     }
     
-    private func calculateAveragePointsAgainst(data: NFLTeamSeasonRawData) -> Double{
+    private func calculateAveragePointsAgainst(data: NFL_TeamSeasonRawData) -> Double{
         return Double(data.OpponentScore) / Double(data.Games)
     }
     
-    private func calculateAverageTimeOfPossesion(data: NFLTeamSeasonRawData) -> Int{
+    private func calculateAverageTimeOfPossesion(data: NFL_TeamSeasonRawData) -> Int{
         let time = data.TimeOfPossession.components(separatedBy: ":")
         var totalseconds = Int(time[0])!*60
         totalseconds += Int(time[1])!
@@ -187,7 +187,7 @@ class NFLResultsGenerator : ResultsGenerator {
         
     }
     
-    private func calculateRedZoneAttemptsPerGame(data: NFLTeamSeasonRawData) -> Double{
+    private func calculateRedZoneAttemptsPerGame(data: NFL_TeamSeasonRawData) -> Double{
         return Double(data.RedZoneAttempts) / Double(data.Games)
     }
 

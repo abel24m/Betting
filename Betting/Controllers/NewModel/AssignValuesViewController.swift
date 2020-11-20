@@ -159,7 +159,15 @@ class AssignValuesViewController: UIViewController {
         
         if (segue.identifier == "ResultsSegue"){
             let destinationVC = segue.destination as! ModelResultsController
-            destinationVC.resultsGenerator = NFLResultsGenerator(modelM: self.modelMaster, league: self.league as! NFL)
+            switch modelMaster.getLeague() {
+            case "NFL":
+                destinationVC.resultsGenerator = NFLResultsGenerator(modelM: self.modelMaster, league: self.league as! NFL)
+            case "NCAAF":
+                destinationVC.resultsGenerator = NCAAFResultsGenerator(modelM: self.modelMaster, league: self.league as! NCAAF)
+            default:
+                break
+            }
+            
         }
     }
    

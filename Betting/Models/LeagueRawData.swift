@@ -14,7 +14,7 @@ import Foundation
  This Struct is not complete with all the possible variables that comes
  from the api get call
  */
-struct NFLTeamSeasonRawData: Decodable {
+struct NFL_TeamSeasonRawData: Decodable {
     let SeasonType: Int
     let Season: Int
     let Team: String
@@ -91,12 +91,41 @@ struct NFLTeamSeasonRawData: Decodable {
     let TeamStatID: Int
 }
 
-struct NFLWeeklyMatchUpRawData: Decodable {
+struct NFL_WeeklyMatchUpRawData: Decodable {
     let GameKey: String?
     let Date: String?
     let AwayTeam : String?
     let HomeTeam : String?
     let Channel : String?
     let Status: String?
+}
+
+struct NCAAF_TeamSeasonRawData : Decodable{
+    let Season: Int
+    let Name: String
+    let Team: String
+    let Wins: Int
+    let Losses: Int
+    let PointsFor: Int
+    let PointsAgainst: Int
+    let TimeOfPossessionMinutes: Int
+    let TimeOfPossessionSeconds: Int
+    let PassingCompletionPercentage: Double
+    let RushingYardsPerAttempt: Double
+}
+
+struct NCAAF_WeeklyMatchUpRawData : Decodable{
+    let Status: String
+    let HomeTeam: String
+    let AwayTeam: String
+    let Channel: String
+}
+
+struct NCAAB_TeamSeasonRawData: Decodable{
+    
+}
+
+struct NCAAB_WeeklyMatchUpRawData : Decodable {
+    
 }
 

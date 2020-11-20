@@ -25,6 +25,7 @@
 		C19AF03825609BB900019CE2 /* LeagueMatchupResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AF03725609BB900019CE2 /* LeagueMatchupResults.swift */; };
 		C19AF03B256197D600019CE2 /* ResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AF03A256197D600019CE2 /* ResultsGenerator.swift */; };
 		C19AF03F2562CE1700019CE2 /* NFLResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AF03E2562CE1700019CE2 /* NFLResultsGenerator.swift */; };
+		C19AF0482565E52D00019CE2 /* NCAAFResultsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19AF0472565E52D00019CE2 /* NCAAFResultsGenerator.swift */; };
 		C1A9C34F251DB50800A4FDA4 /* AssignValuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */; };
 		C1C2FF012550AEC60006F8A4 /* MyLocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */; };
 		C1F8F85C2507377200EB1FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F8F85B2507377200EB1FFC /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		C19AF03725609BB900019CE2 /* LeagueMatchupResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueMatchupResults.swift; sourceTree = "<group>"; };
 		C19AF03A256197D600019CE2 /* ResultsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsGenerator.swift; sourceTree = "<group>"; };
 		C19AF03E2562CE1700019CE2 /* NFLResultsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFLResultsGenerator.swift; sourceTree = "<group>"; };
+		C19AF0472565E52D00019CE2 /* NCAAFResultsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCAAFResultsGenerator.swift; sourceTree = "<group>"; };
 		C1A9C34E251DB50800A4FDA4 /* AssignValuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignValuesViewController.swift; sourceTree = "<group>"; };
 		C1C2FF002550AEC60006F8A4 /* MyLocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocksViewController.swift; sourceTree = "<group>"; };
 		C1F8F8582507377200EB1FFC /* Locks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locks.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,12 +77,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C101808B2540CC2E00795C4E /* ModelResults */ = {
+		C101808B2540CC2E00795C4E /* ModelMaster */ = {
 			isa = PBXGroup;
 			children = (
 				C10180872540BD7000795C4E /* ModelMaster.swift */,
 			);
-			path = ModelResults;
+			path = ModelMaster;
 			sourceTree = "<group>";
 		};
 		C19AF010256093AB00019CE2 /* NewModel */ = {
@@ -111,6 +113,7 @@
 			children = (
 				C19AF03A256197D600019CE2 /* ResultsGenerator.swift */,
 				C19AF03E2562CE1700019CE2 /* NFLResultsGenerator.swift */,
+				C19AF0472565E52D00019CE2 /* NCAAFResultsGenerator.swift */,
 			);
 			path = ResultsGenerator;
 			sourceTree = "<group>";
@@ -128,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				C19AF03D2562CDF400019CE2 /* ResultsGenerator */,
-				C101808B2540CC2E00795C4E /* ModelResults */,
+				C101808B2540CC2E00795C4E /* ModelMaster */,
 				C19AF02D2560979B00019CE2 /* TeamStats.swift */,
 				C19AF0312560989900019CE2 /* LeagueData.swift */,
 				C19AF03425609AC100019CE2 /* LeagueRawData.swift */,
@@ -272,6 +275,7 @@
 				C1A9C34F251DB50800A4FDA4 /* AssignValuesViewController.swift in Sources */,
 				C19AF03825609BB900019CE2 /* LeagueMatchupResults.swift in Sources */,
 				C10180852540A89A00795C4E /* ModelResultsController.swift in Sources */,
+				C19AF0482565E52D00019CE2 /* NCAAFResultsGenerator.swift in Sources */,
 				C19AF028256096FA00019CE2 /* Model+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

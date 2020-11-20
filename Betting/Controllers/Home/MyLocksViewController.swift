@@ -122,7 +122,14 @@ extension MyLocksViewController : UITableViewDataSource{
         
         cell.textLabel?.text = model.name
         cell.textLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        cell.imageView?.image = #imageLiteral(resourceName: "NflLogo")
+        var leagueLogo = UIImage()
+        switch model.league {
+        case "NFL":
+            leagueLogo = #imageLiteral(resourceName: "NflLogo")
+        default:
+            leagueLogo = #imageLiteral(resourceName: "NCAAF")
+        }
+        cell.imageView?.image = leagueLogo
         
         
         return cell

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Louisiana Rajin Cajuns.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Louisiana Rajin Cajuns@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Louisiana Rajin Cajuns@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

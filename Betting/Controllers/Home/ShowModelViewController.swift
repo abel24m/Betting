@@ -274,9 +274,15 @@ class ShowModelViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowResultsSegue" {
             let destinationVC = segue.destination as! ResultsSavedModelViewController
-            if modelMaster.getLeague() == "NFL"{
+            switch modelMaster.getLeague() {
+            case "NFL":
+                destinationVC.resultsGenerator = NFLResultsGenerator(modelM: modelMaster, league: league as! NFL)
+            case "NCAAF":
+                destinationVC.resultsGenerator = NCAAFResultsGenerator(modelM: modelMaster, league: league as! NCAAF)
+            default:
                 destinationVC.resultsGenerator = NFLResultsGenerator(modelM: modelMaster, league: league as! NFL)
             }
+            
             
         }
     }

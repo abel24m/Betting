@@ -45,6 +45,40 @@ struct NFLMatchUp : MatchUpResults {
     
 }
 
+struct NCAAFMatchUp : MatchUpResults {
+    var HomeTeam : String
+    var AwayTeam : String
+    var Home_ModelScore : Double
+    var Away_ModelScore : Double
+    var Home_Percentage : Double
+    var Away_Percentage : Double
+    var Winner : String
+    var AvgPPG_Results: [String:Double]
+    var AvgPA_Results: [String:Double]
+    var AvgTOP_Results : [String:Double]
+    var PassComp_Results: [String:Double]
+    var RushYardsPA_Results : [String:Double]
+    
+    init() {
+        HomeTeam = ""
+        AwayTeam = ""
+        Home_ModelScore = 0.0
+        Away_ModelScore = 0.0
+        Home_Percentage = 0.0
+        Away_Percentage = 0.0
+        Winner = ""
+        AvgPPG_Results = [String:Double]()
+        AvgPA_Results = [String:Double]()
+        AvgTOP_Results = [String:Double]()
+        PassComp_Results = [String:Double]()
+        RushYardsPA_Results = [String:Double]()
+        
+    }
+    
+    
+    
+}
+
 struct NBAMatchup {
     
 }

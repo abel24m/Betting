@@ -38,6 +38,17 @@ class ChooseLeagueController: UIViewController {
         performSegue(withIdentifier: "ChooseStatsSegue", sender: self)
     }
     
+    @IBAction func NcaafLeaguePressed(_ sender: Any) {
+        modelMaster.setLeague(league: "NCAAF")
+        league = NCAAF()
+        performSegue(withIdentifier: "ChooseStatsSegue", sender: self)
+    }
+    
+    @IBAction func NcaabLeaguePressed(_ sender: Any) {
+        
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "ChooseStatsSegue"){
             let destinationVC = segue.destination as! StatsChooseController
