@@ -38,9 +38,8 @@ class ResultsSavedModelViewController: UIViewController {
     
     
     func populateResults() {
-        contentViewHeight.constant = CGFloat(200 * resultsGenerator.results.count)
+        contentViewHeight.constant = CGFloat(150 * resultsGenerator.results.count)
         for matchup in resultsGenerator.results{
-            
             let matchupStackView = UIStackView()
             matchupStackView.axis = .horizontal
             matchupStackView.distribution = .fillEqually
@@ -55,7 +54,7 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             
-            let homeStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: ResultStackView.frame.width / 2, height: 200))
+            let homeStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: ResultStackView.frame.width / 2, height: 150))
             homeStackView.axis = .vertical
             homeStackView.distribution = .fill
             homeStackView.alignment = .fill
@@ -64,61 +63,20 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             //
-            //HOME TEAM LOGO VIEW
-            //
-            //
-            //
-
-            let homeTeamLogoView = UIView()
-            homeTeamLogoView.backgroundColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
-            
-            homeStackView.addArrangedSubview(homeTeamLogoView)
-            
-            homeTeamLogoView.translatesAutoresizingMaskIntoConstraints = false
-            var leadingConst = NSLayoutConstraint(item: homeTeamLogoView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            var trailingConst = NSLayoutConstraint(item: homeTeamLogoView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            var heightContraint = NSLayoutConstraint(item: homeTeamLogoView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            
-            homeStackView.addConstraints([leadingConst, trailingConst, heightContraint])
-            
-            //
-            //
-            //
-            //HOME TEAM LOGO IMAGE
-            //
-            //
-            //
-            
-            let logo = UIImage(named: matchup.HomeTeam)
-            let logoView = UIImageView(image: logo)
-            homeTeamLogoView.addSubview(logoView)
-            
-            logoView.translatesAutoresizingMaskIntoConstraints = false
-            var centerXConst = NSLayoutConstraint(item: logoView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeTeamLogoView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            var centerYConst = NSLayoutConstraint(item: logoView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeTeamLogoView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            var widthConst = NSLayoutConstraint(item: logoView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            var heighConst = NSLayoutConstraint(item: logoView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            
-            homeTeamLogoView.addConstraints([centerYConst,centerXConst,widthConst, heighConst])
-            
-            //
-            //
-            //
             // HOME TEAM NAME VIEW
             //
             //
           
-            let homeNameView = UIView()
+            let homeNameView = UIView(frame: CGRect(x: 0, y: 0, width: homeStackView.frame.width, height: 80))
             homeNameView.backgroundColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
             
             homeStackView.addArrangedSubview(homeNameView)
             
             homeNameView.translatesAutoresizingMaskIntoConstraints = false
-            leadingConst = NSLayoutConstraint(item: homeNameView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: homeNameView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightContraint = NSLayoutConstraint(item: homeNameView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
             
-            homeStackView.addConstraints([leadingConst, trailingConst, heightContraint])
+            var heightConstraint = NSLayoutConstraint(item: homeNameView, attribute: .height, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+            
+            homeNameView.addConstraint(heightConstraint)
             
             //
             //
@@ -137,13 +95,10 @@ class ResultsSavedModelViewController: UIViewController {
 
             homeLabel.translatesAutoresizingMaskIntoConstraints = false
             //add constraints to view for label
-            centerXConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            centerYConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            leadingConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            var heightConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
+            var centerXConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            var centerYConst = NSLayoutConstraint(item: homeLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeNameView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
 
-            homeNameView.addConstraints([centerXConst, centerYConst, leadingConst, trailingConst, heightConst])
+            homeNameView.addConstraints([centerXConst, centerYConst])
             
             //
             //
@@ -153,22 +108,20 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             
-            let homePercentView = UIView()
-            if matchup.Home_Percentage > matchup.Away_Percentage{
-                homePercentView.backgroundColor = #colorLiteral(red: 0, green: 0.8792312741, blue: 0, alpha: 1)
+            let homeSUPercentView = UIView(frame: CGRect(x: 0, y: 0, width: homeStackView.frame.width, height: 35))
+            if matchup.Home_MoneylinePercentage > matchup.Away_MoneylinePercentage{
+                homeSUPercentView.backgroundColor = #colorLiteral(red: 0, green: 0.8792312741, blue: 0, alpha: 1)
             }else{
-                homePercentView.backgroundColor = #colorLiteral(red: 0.8391280174, green: 0, blue: 0, alpha: 1)
+                homeSUPercentView.backgroundColor = #colorLiteral(red: 0.8391280174, green: 0, blue: 0, alpha: 1)
             }
             
+            homeStackView.addArrangedSubview(homeSUPercentView)
             
-            homeStackView.addArrangedSubview(homePercentView)
+            homeSUPercentView.translatesAutoresizingMaskIntoConstraints = false
             
-            homePercentView.translatesAutoresizingMaskIntoConstraints = false
-            leadingConst = NSLayoutConstraint(item: homePercentView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: homePercentView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightContraint = NSLayoutConstraint(item: homePercentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
+            heightConstraint = NSLayoutConstraint(item: homeSUPercentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35)
             
-            homeStackView.addConstraints([leadingConst, trailingConst, heightContraint])
+            homeSUPercentView.addConstraint(heightConstraint)
             
             //
             //
@@ -178,24 +131,68 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             
-            let homePercentLabel = UILabel()
-            homePercentLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-            homePercentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 25)
-            homePercentLabel.textAlignment = NSTextAlignment.center
-            homePercentLabel.text = "\(Int(matchup.Home_Percentage * 100))%"
-            homePercentView.addSubview(homePercentLabel)
+            let homeSUPercentLabel = UILabel()
+            homeSUPercentLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            homeSUPercentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 25)
+            homeSUPercentLabel.textAlignment = NSTextAlignment.center
+            homeSUPercentLabel.text = "\(Int(matchup.Home_MoneylinePercentage * 100))%"
+            homeSUPercentView.addSubview(homeSUPercentLabel)
             
-            homePercentLabel.translatesAutoresizingMaskIntoConstraints = false
+            homeSUPercentLabel.translatesAutoresizingMaskIntoConstraints = false
             
-            centerXConst = NSLayoutConstraint(item: homePercentLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homePercentView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            centerYConst = NSLayoutConstraint(item: homePercentLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homePercentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            leadingConst = NSLayoutConstraint(item: homePercentLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homePercentView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: homePercentLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homePercentView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightConst = NSLayoutConstraint(item: homePercentLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
+            centerXConst = NSLayoutConstraint(item: homeSUPercentLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeSUPercentView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            centerYConst = NSLayoutConstraint(item: homeSUPercentLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeSUPercentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
 
-            homePercentView.addConstraints([centerXConst, centerYConst, leadingConst, heightConst])
+            homeSUPercentView.addConstraints([centerXConst, centerYConst])
 
-            homeStackView.addArrangedSubview(homePercentView)
+            homeStackView.addArrangedSubview(homeSUPercentView)
+            
+            //
+            //
+            //
+            //HOME ATS PERCENT VIEW
+            //
+            //
+            //
+            
+            let homeATSPercentView = UIView(frame: CGRect(x: 0, y: 0, width: homeStackView.frame.width, height: 35))
+            if matchup.Home_SpreadPercentage > matchup.Away_SpreadPercentage{
+                homeATSPercentView.backgroundColor = #colorLiteral(red: 0, green: 0.8792312741, blue: 0, alpha: 1)
+            }else{
+                homeATSPercentView.backgroundColor = #colorLiteral(red: 0.8391280174, green: 0, blue: 0, alpha: 1)
+            }
+            
+            homeStackView.addArrangedSubview(homeATSPercentView)
+            
+            homeATSPercentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            heightConstraint = NSLayoutConstraint(item: homeATSPercentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35)
+            
+            homeATSPercentView.addConstraint(heightConstraint)
+            
+            //
+            //
+            //
+            //HOME TEAM ATS PERCENT LABEL
+            //
+            //
+            //
+            
+            let homeATSPercentLabel = UILabel()
+            homeATSPercentLabel.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            homeATSPercentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 25)
+            homeATSPercentLabel.textAlignment = NSTextAlignment.center
+            homeATSPercentLabel.text = "\(Int(matchup.Home_SpreadPercentage * 100))%"
+            homeATSPercentView.addSubview(homeATSPercentLabel)
+            
+            homeATSPercentLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            centerXConst = NSLayoutConstraint(item: homeATSPercentLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeATSPercentView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            centerYConst = NSLayoutConstraint(item: homeATSPercentLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: homeATSPercentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+
+            homeATSPercentView.addConstraints([centerXConst, centerYConst])
+
+            homeStackView.addArrangedSubview(homeATSPercentView)
         
             //
             //
@@ -205,50 +202,12 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
                         
-            let awayStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: ResultStackView.frame.width / 2, height: 200))
+            let awayStackView = UIStackView(frame: CGRect(x: 0, y: 0, width: ResultStackView.frame.width / 2, height: 150))
             awayStackView.axis = .vertical
             awayStackView.distribution = .fill
             awayStackView.alignment = .fill
             awayStackView.spacing = 0
             
-            //
-            //
-            //
-            //AWAY TEAM LOGO VIEW
-            //
-            //
-            //
-            
-            let awayTeamLogoView = UIView()
-            awayTeamLogoView.backgroundColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
-            
-            awayStackView.addArrangedSubview(awayTeamLogoView)
-            
-            awayTeamLogoView.translatesAutoresizingMaskIntoConstraints = false
-            leadingConst = NSLayoutConstraint(item: awayTeamLogoView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: awayTeamLogoView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightContraint = NSLayoutConstraint(item: awayTeamLogoView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            
-            awayStackView.addConstraints([leadingConst, trailingConst, heightContraint])
-            
-            //
-            //
-            //
-            //AWAY TEAM LOGO IMAGE
-            //
-            //
-            //
-            let awayLogo = UIImage(named: matchup.AwayTeam)
-            let awayLogoImage = UIImageView(image: awayLogo)
-            awayTeamLogoView.addSubview(awayLogoImage)
-            
-            awayLogoImage.translatesAutoresizingMaskIntoConstraints = false
-            centerXConst = NSLayoutConstraint(item: awayLogoImage, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayTeamLogoView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
-            centerYConst = NSLayoutConstraint(item: awayLogoImage, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayTeamLogoView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            widthConst = NSLayoutConstraint(item: awayLogoImage, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            heighConst = NSLayoutConstraint(item: awayLogoImage, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 100)
-            
-            awayTeamLogoView.addConstraints([centerYConst,centerXConst,widthConst, heighConst])
             
             //
             //
@@ -258,17 +217,17 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             
-            let awayNameView = UIView()
+            let awayNameView = UIView(frame: CGRect(x: 0, y: 0, width: awayStackView.frame.width, height: 80))
             awayNameView.backgroundColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
             
             awayStackView.addArrangedSubview(awayNameView)
             
-            awayNameView.translatesAutoresizingMaskIntoConstraints = false
-            leadingConst = NSLayoutConstraint(item: awayNameView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: awayNameView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightContraint = NSLayoutConstraint(item: awayNameView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
+            awayStackView.translatesAutoresizingMaskIntoConstraints = false
             
-            awayStackView.addConstraints([leadingConst, trailingConst, heightContraint])
+            heightConstraint = NSLayoutConstraint(item: awayNameView, attribute: .height, relatedBy: .lessThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 80)
+            
+            awayNameView.addConstraint(heightConstraint)
+        
             
             //
             //
@@ -289,11 +248,8 @@ class ResultsSavedModelViewController: UIViewController {
             //add constraints to view for label
             centerXConst = NSLayoutConstraint(item: awayLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayNameView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
             centerYConst = NSLayoutConstraint(item: awayLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayNameView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            leadingConst = NSLayoutConstraint(item: awayLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayNameView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: awayLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayNameView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightConst = NSLayoutConstraint(item: awayLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
 
-            awayNameView.addConstraints([centerXConst, centerYConst, leadingConst, trailingConst, heightConst])
+            awayNameView.addConstraints([centerXConst, centerYConst])
             
             //
             //
@@ -303,8 +259,8 @@ class ResultsSavedModelViewController: UIViewController {
             //
             //
             
-            let awayPercentView = UIView()
-            if matchup.Home_Percentage < matchup.Away_Percentage{
+            let awayPercentView = UIView(frame: CGRect(x: 0, y: 0, width: homeStackView.frame.width, height: 35))
+            if matchup.Home_MoneylinePercentage < matchup.Away_MoneylinePercentage{
                 awayPercentView.backgroundColor = #colorLiteral(red: 0, green: 0.8792312741, blue: 0, alpha: 1)
             }else{
                 awayPercentView.backgroundColor = #colorLiteral(red: 0.8973830342, green: 0, blue: 0.1194367632, alpha: 1)
@@ -313,11 +269,11 @@ class ResultsSavedModelViewController: UIViewController {
             awayStackView.addArrangedSubview(awayPercentView)
             
             awayPercentView.translatesAutoresizingMaskIntoConstraints = false
-            leadingConst = NSLayoutConstraint(item: awayPercentView, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: awayPercentView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayStackView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightContraint = NSLayoutConstraint(item: awayPercentView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
             
-            awayStackView.addConstraints([leadingConst, trailingConst, heightContraint])
+            heightConstraint = NSLayoutConstraint(item: awayPercentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35)
+            
+            awayPercentView.addConstraint(heightConstraint)
+            
             
             //
             //
@@ -331,24 +287,68 @@ class ResultsSavedModelViewController: UIViewController {
             awayPercentLabel.textColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
             awayPercentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 25)
             awayPercentLabel.textAlignment = NSTextAlignment.center
-            awayPercentLabel.text = "\(Int(matchup.Away_Percentage * 100))%"
+            awayPercentLabel.text = "\(Int(matchup.Away_MoneylinePercentage * 100))%"
             awayPercentView.addSubview(awayPercentLabel)
 
             awayPercentLabel.translatesAutoresizingMaskIntoConstraints = false
             
             centerXConst = NSLayoutConstraint(item: awayPercentLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayPercentView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
             centerYConst = NSLayoutConstraint(item: awayPercentLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayPercentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
-            leadingConst = NSLayoutConstraint(item: awayPercentLabel, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayPercentView, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: 0)
-            trailingConst = NSLayoutConstraint(item: awayPercentLabel, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayPercentView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 0)
-            heightConst = NSLayoutConstraint(item: awayPercentLabel, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 50)
 
-            awayPercentView.addConstraints([centerXConst, centerYConst, leadingConst, trailingConst, heightConst])
+            awayPercentView.addConstraints([centerXConst, centerYConst])
+            
+            //
+            //
+            //
+            //AWAY TEAM ATS PERCENT VIEW
+            //
+            //
+            //
+            
+            let awayATSPercentView = UIView(frame: CGRect(x: 0, y: 0, width: homeStackView.frame.width, height: 35))
+            if matchup.Home_SpreadPercentage < matchup.Away_SpreadPercentage{
+                awayATSPercentView.backgroundColor = #colorLiteral(red: 0, green: 0.8792312741, blue: 0, alpha: 1)
+            }else{
+                awayATSPercentView.backgroundColor = #colorLiteral(red: 0.8973830342, green: 0, blue: 0.1194367632, alpha: 1)
+            }
+            
+            awayStackView.addArrangedSubview(awayATSPercentView)
+            
+            awayATSPercentView.translatesAutoresizingMaskIntoConstraints = false
+            
+            heightConstraint = NSLayoutConstraint(item: awayATSPercentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 35)
+            
+            awayATSPercentView.addConstraint(heightConstraint)
+            
+            
+            //
+            //
+            //
+            //AWAY TEAM PERCENT LABEL
+            //
+            //
+            //
+            
+            let awayATSPercentLabel = UILabel()
+            awayATSPercentLabel.textColor = #colorLiteral(red: 0.04008977488, green: 0.03513521701, blue: 0.04804535955, alpha: 1)
+            awayATSPercentLabel.font = UIFont(name: "Kohinoor Gujarati Bold", size: 25)
+            awayATSPercentLabel.textAlignment = NSTextAlignment.center
+            awayATSPercentLabel.text = "\(Int(matchup.Away_SpreadPercentage * 100))%"
+            awayATSPercentView.addSubview(awayATSPercentLabel)
+
+            awayATSPercentLabel.translatesAutoresizingMaskIntoConstraints = false
+            
+            centerXConst = NSLayoutConstraint(item: awayATSPercentLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayATSPercentView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
+            centerYConst = NSLayoutConstraint(item: awayATSPercentLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: awayATSPercentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
+
+            awayATSPercentView.addConstraints([centerXConst, centerYConst])
             
             matchupStackView.addArrangedSubview(homeStackView)
             matchupStackView.addArrangedSubview(awayStackView)
             
             
             ResultStackView.addArrangedSubview(matchupStackView)
+            
             
         }
         

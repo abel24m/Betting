@@ -16,14 +16,28 @@ struct NFLTeam {
     var Name : String
     var AveragePointsPerGame : Double
     var AveragePointsAgainst : Double
-    var AverageTimeOfPossesion : Int
+    var TimeOfPossession : Int
+    var OpponentTimeOfPossession : Int
     var RedZoneAttemptsPerGame : Double
+    var PassingCompletionPercentage : Double
+    var ThirdDownPercentage : Double
+    var FourthDownPercentage : Double
+    var TakeawaysPerGame : Double
+    var PassingYardsPerGame : Double
+    var RushingYardsPerGame : Double
     
     init(team: String) {
         AveragePointsPerGame = 0.0
         AveragePointsAgainst = 0.0
-        AverageTimeOfPossesion = 0
+        TimeOfPossession = 0
+        OpponentTimeOfPossession = 0
         RedZoneAttemptsPerGame = 0.0
+        PassingCompletionPercentage = 0.0
+        ThirdDownPercentage = 0.0
+        FourthDownPercentage = 0.0
+        TakeawaysPerGame = 0.0
+        PassingYardsPerGame = 0.0
+        RushingYardsPerGame = 0.0
         Name = ""
         Team = team
     }
@@ -34,14 +48,16 @@ struct NCAAFTeam {
     var Name : String
     var AveragePointsPerGame : Double
     var AveragePointsAgainst : Double
-    var AverageTimeOfPossesion : Int
+    var TimeOfPossession : Int
+    var OpponentTimeOfPossession : Int
     var PassingCompletionPercentage : Double
     var RushingYardsPerAttempt : Double
     
     init(team: String) {
         AveragePointsAgainst = 0.0
         AveragePointsPerGame = 0.0
-        AverageTimeOfPossesion = 0
+        TimeOfPossession = 0
+        OpponentTimeOfPossession = 0
         PassingCompletionPercentage = 0.0
         RushingYardsPerAttempt = 0.0
         Name = ""

@@ -21,16 +21,6 @@ struct NFL_TeamSeasonRawData: Decodable {
     let Score: Int
     let OpponentScore: Int
     let TotalScore: Int
-    let Temperature: Int
-    let Humidity: Int
-    let WindSpeed: Int
-    let OverUnder: Double
-    let PointSpread: Double
-    let ScoreQuarter1: Int
-    let ScoreQuarter2: Int
-    let ScoreQuarter3: Int
-    let ScoreQuarter4: Int
-    let ScoreOvertime: Int
     let TimeOfPossession: String
     let FirstDowns: Int
     let FirstDownsByRushing: Int
@@ -63,32 +53,18 @@ struct NFL_TeamSeasonRawData: Decodable {
     let RedZoneConversions: Int
     let GoalToGoAttempts: Int
     let GoalToGoConversions: Int
-    let ReturnYards: Int
-    let Penalties: Int
-    let PenaltyYards: Int
     let Fumbles: Int
-    let FumblesLost: Int
-    let TimesSacked: Int
-    let TimesSackedYards: Int
-    let QuarterbackHits: Int
-    let TacklesForLoss: Int
-    let Safeties: Int
-    let Punts: Int
-    let PuntYards: Int
-    let PuntAverage: Double
-    let Giveaways: Int
     let Takeaways: Int
-    let OpponentPuntNetYards: Int
-    let TeamName: String
+//    let TeamName: String
     let Games: Int
-    let PassingDropbacks: Int
-    let OpponentPassingDropbacks: Int
     let TeamSeasonID: Int
-    let TwoPointConversionReturns: Int
-    let OpponentTwoPointConversionReturns: Int
+    let OpponentTimeOfPossession: String
     let TeamID: Int
-    let GlobalTeamID: Int
-    let TeamStatID: Int
+}
+
+struct NFL_TeamRawData : Decodable{
+    let Key: String
+    let FullName: String
 }
 
 struct NFL_WeeklyMatchUpRawData: Decodable {
@@ -96,8 +72,9 @@ struct NFL_WeeklyMatchUpRawData: Decodable {
     let Date: String?
     let AwayTeam : String?
     let HomeTeam : String?
-    let Channel : String?
     let Status: String?
+    let PointSpread : Double?
+    let OverUnder : Double?
 }
 
 struct NCAAF_TeamSeasonRawData : Decodable{
@@ -122,10 +99,29 @@ struct NCAAF_WeeklyMatchUpRawData : Decodable{
 }
 
 struct NCAAB_TeamSeasonRawData: Decodable{
-    
+    let Season: Int
+    let Name: String
+    let Team: String
+    let Wins : Int
+    let Losses : Int
+    let Games : Int
+    let FieldGoalPercentage : Double
+    let TwoPointersPercentage : Double
+    let ThreePointersPercentage : Double
+    let FreeThrowsPercentage : Double
+    let OffensiveRebounds : Int
+    let DefensiveRebounds : Int
+    let Assists : Int
+    let Steals : Int
+    let Turnovers : Int
+    let Points : Int
 }
 
 struct NCAAB_WeeklyMatchUpRawData : Decodable {
+    let HomeTeam : String
+    let AwayTeam : String
+    let Status : String
+    let Day : String
     
 }
 

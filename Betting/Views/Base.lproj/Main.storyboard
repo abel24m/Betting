@@ -17,9 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0a-Iy-o5a" userLabel="NflButton">
-                                <rect key="frame" x="48" y="149" width="115" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0a-Iy-o5a" userLabel="NflButton">
+                                <rect key="frame" x="164" y="393" width="100" height="140"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="AwA-ZR-va9"/>
+                                    <constraint firstAttribute="width" constant="100" id="V52-Ui-NIU"/>
+                                </constraints>
                                 <state key="normal" image="NflLogo">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -27,25 +30,13 @@
                                     <action selector="NflLeaguePressed:" destination="ewX-xD-HFO" eventType="touchUpInside" id="AYt-Eg-VKH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cbS-Ex-ToS" userLabel="NcaafButton">
-                                <rect key="frame" x="256" y="149" width="125" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="NCAAF"/>
-                                <connections>
-                                    <action selector="NcaafLeaguePressed:" destination="ewX-xD-HFO" eventType="touchUpInside" id="UDe-xK-ygo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-yc-jhV">
-                                <rect key="frame" x="43" y="372" width="125" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="NCAAB"/>
-                                <connections>
-                                    <action selector="NcaabLeaguePressed:" destination="ewX-xD-HFO" eventType="touchUpInside" id="Nfd-uI-CeH"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rv5-Qa-4Jj"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="a0a-Iy-o5a" firstAttribute="centerY" secondItem="Xsz-fL-v2H" secondAttribute="centerY" id="Mvy-Ai-JL2"/>
+                            <constraint firstItem="a0a-Iy-o5a" firstAttribute="centerX" secondItem="Xsz-fL-v2H" secondAttribute="centerX" id="njU-c9-sx8"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Choose League" id="BdS-s4-x28"/>
                     <connections>
@@ -1057,8 +1048,6 @@
     </scenes>
     <color key="tintColor" red="0.0" green="0.019607843140000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
     <resources>
-        <image name="NCAAB" width="333.66665649414062" height="363.66665649414062"/>
-        <image name="NCAAF" width="333.66665649414062" height="366.33334350585938"/>
         <image name="NflLogo" width="400" height="549.66668701171875"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="lock" catalog="system" width="128" height="128"/>

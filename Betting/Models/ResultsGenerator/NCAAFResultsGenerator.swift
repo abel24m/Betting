@@ -100,9 +100,9 @@ class NCAAFResultsGenerator: ResultsGenerator {
                         continue
                     }
                 }
-                match.Home_Percentage = getPercentage(scoreOne: match.Home_ModelScore, scoreTwo: match.Away_ModelScore)
-                match.Away_Percentage = getPercentage(scoreOne: match.Away_ModelScore, scoreTwo: match.Home_ModelScore)
-                match.Winner = match.Home_Percentage > match.Away_Percentage ? match.HomeTeam : match.AwayTeam
+                match.Home_MoneylinePercentage = getPercentage(scoreOne: match.Home_ModelScore, scoreTwo: match.Away_ModelScore)
+                match.Away_MoneylinePercentage = getPercentage(scoreOne: match.Away_ModelScore, scoreTwo: match.Home_ModelScore)
+                match.Winner = match.Home_MoneylinePercentage > match.Away_MoneylinePercentage ? match.HomeTeam : match.AwayTeam
                 print(match)
                 nflMatchups.append(match)
             }
@@ -139,9 +139,9 @@ class NCAAFResultsGenerator: ResultsGenerator {
     func whoWonAverageTimeOfPossesion(homeTeam: NCAAFTeam, awayTeam: NCAAFTeam, percent: String) -> [String: Double] {
         let value = turnPercentageIntoDecimal(value: percent)
         var avgTOP_Results = [String:Double]()
-        let diff = abs(homeTeam.AverageTimeOfPossesion - awayTeam.AverageTimeOfPossesion)
+        let diff = abs(homeTeam.TimeOfPossession - awayTeam.TimeOfPossession)
         let modelPoints = (Double(diff) * 0.01) * value
-        let winningTeam = homeTeam.AverageTimeOfPossesion > awayTeam.AverageTimeOfPossesion ? homeTeam.Name : awayTeam.Name
+        let winningTeam = homeTeam.TimeOfPossession > awayTeam.TimeOfPossession ? homeTeam.Name : awayTeam.Name
         avgTOP_Results[winningTeam] = modelPoints
         return avgTOP_Results
     }
@@ -184,7 +184,7 @@ class NCAAFResultsGenerator: ResultsGenerator {
                 case "Average Points Against":
                     team.AveragePointsAgainst = calculateAveragePointsAgainst(data: teamData)
                 case "Average Time Of Possession":
-                    team.AverageTimeOfPossesion = calculateAverageTimeOfPossesion(data: teamData)
+                    team.TimeOfPossession = calculateAverageTimeOfPossesion(data: teamData)
                 case "Passing Completion Percentage":
                     team.PassingCompletionPercentage = calculatePassingCompletionPercentage(data: teamData)
                 case "Rushing Yards Per Attempt" :
